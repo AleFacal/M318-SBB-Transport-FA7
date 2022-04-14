@@ -47,9 +47,9 @@ namespace SwissTransportGUI
 
         private void Autocomplete(TextBox tBox, DataGridView grid)
         {
-            Stations allStations = this.itTransport.GetStations(tBox.Text);
+            Stations alleStationen = this.itTransport.GetStations(tBox.Text);
             BindingList<Station> stations = new BindingList<Station>();
-            foreach (Station station in allStations.StationList)
+            foreach (Station station in alleStationen.StationList)
             {
                 stations.Add(station);
             }
@@ -63,7 +63,6 @@ namespace SwissTransportGUI
                 }
             }
         }
-
 
         public void VerbindungenSuchen_Click(object sender, EventArgs e)
         {
@@ -80,9 +79,9 @@ namespace SwissTransportGUI
         private void StSuche_Click(object sender, EventArgs e)
         {
             string allStationNames = StName.Text;
-            Stations allStations = this.itTransport.GetStations(allStationNames);
+            Stations alleStationen = this.itTransport.GetStations(allStationNames);
             BindingList<Station> stationNames = new BindingList<Station>();
-            foreach (Station station in allStations.StationList)
+            foreach (Station station in alleStationen.StationList)
             {
                 stationNames.Add(station);
             }
@@ -99,36 +98,15 @@ namespace SwissTransportGUI
         private void AbfahrtenSuche_Click(object sender, EventArgs e)
         {
             string abfahrtsStation = AbfahrtStation.Text;
-            Stations allStations = this.itTransport.GetStations(abfahrtsStation);
-            StationBoardRoot stationBoards = this.itTransport.GetStationBoard(abfahrtsStation, allStations.StationList[0].Id);
-            BindingList<AbfahrtenKlasse> stations = new BindingList<AbfahrtenKlasse>();
+            Stations alleStationen = this.itTransport.GetStations(abfahrtsStation);
+            StationBoardRoot stationBoards = this.itTransport.GetStationBoard(abfahrtsStation, alleStationen.StationList[0].Id);
+            BindingList<AbfahrtenKlasse> stationen = new BindingList<AbfahrtenKlasse>();
 
             foreach (StationBoard stationBoard in stationBoards.Entries)
             {
-                stations.Add(new AbfahrtenKlasse(stationBoard.Category, stationBoard.Operator, stationBoard.To, stationBoard.Stop.Departure));
+                stationen.Add(new AbfahrtenKlasse(stationBoard.Category, stationBoard.Operator, stationBoard.To, stationBoard.Stop.Departure));
             }
-            AbfahrtsFahrten.DataSource = stations;
-        }
-
-        private void AnzeigeEndeStationen_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                DataGridViewRow row = AnzeigeEndeStationen.Rows[e.RowIndex];
-                AnzeigeEndeStationen.Text = row.Cells["Name"].Value.ToString();
-                AnzeigeEndeStationen.Visible = false;
-            }
-
-        }
-
-        private void AnzeigeStStationen_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                DataGridViewRow row = AnzeigeStStationen.Rows[e.RowIndex];
-                AnzeigeStStationen.Text = row.Cells["Name"].Value.ToString();
-                AnzeigeStStationen.Visible = false;
-            }
+            AbfahrtsFahrten.DataSource = stationen;
         }
 
         private void StationenTausch(object sender, EventArgs e)
@@ -136,6 +114,26 @@ namespace SwissTransportGUI
             string startText = StartVerbindung.Text;
             StartVerbindung.Text = EndVerbindung.Text;
             EndVerbindung.Text = startText;
+        }
+
+        private void AnzeigeEndeStationen_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = AnzeigeEndeStationen.Rows[e.RowIndex];
+                EndVerbindung.Text = row.Cells["Name"].Value.ToString();
+                AnzeigeEndeStationen.Visible = false;
+            }
+        }
+
+        private void AnzeigeStStationen_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = AnzeigeStStationen.Rows[e.RowIndex];
+                StartVerbindung.Text = row.Cells["Name"].Value.ToString();
+                AnzeigeStStationen.Visible = false;
+            }
         }
     }
 }

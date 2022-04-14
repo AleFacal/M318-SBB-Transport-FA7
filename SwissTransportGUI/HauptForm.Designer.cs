@@ -140,7 +140,7 @@
             this.AnzeigeStStationen.RowTemplate.Height = 33;
             this.AnzeigeStStationen.Size = new System.Drawing.Size(314, 194);
             this.AnzeigeStStationen.TabIndex = 7;
-            this.AnzeigeStStationen.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.AnzeigeStStationen_CellClick);
+            this.AnzeigeStStationen.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.AnzeigeStStationen_CellContentClick);
             // 
             // AnzeigeEndeStationen
             // 
@@ -151,7 +151,7 @@
             this.AnzeigeEndeStationen.RowTemplate.Height = 33;
             this.AnzeigeEndeStationen.Size = new System.Drawing.Size(314, 194);
             this.AnzeigeEndeStationen.TabIndex = 6;
-            this.AnzeigeEndeStationen.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.AnzeigeEndeStationen_CellClick);
+            this.AnzeigeEndeStationen.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.AnzeigeEndeStationen_CellContentClick);
             // 
             // EndVerbindung
             // 
@@ -272,7 +272,7 @@
             this.StAnzeige.Name = "StAnzeige";
             this.StAnzeige.RowHeadersWidth = 62;
             this.StAnzeige.RowTemplate.Height = 33;
-            this.StAnzeige.Size = new System.Drawing.Size(369, 802);
+            this.StAnzeige.Size = new System.Drawing.Size(807, 802);
             this.StAnzeige.TabIndex = 0;
             // 
             // AbfahrtsKarte
